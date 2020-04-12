@@ -510,8 +510,9 @@ def getBattery(v) {
         if (miliVolts > maxVolts) {
             result = 100
         } else {
-            def pct = (miliVolts - minVolts) / (maxVolts - minVolts)
-            result = Math.min(100, (int) pct * 100)
+            // fix from dchau11 https://community.smartthings.com/t/bloomsky-weather-station/38202/1905
+            def pct = (100 * (miliVolts - minVolts) / (maxVolts - minVolts))
+            result = Math.min(100, (int) pct)
         }
     }
 
